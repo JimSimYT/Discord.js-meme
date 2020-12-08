@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-function loadCommands(bot) {
+function loadCommands(Client) {
     fs.readdir('commands/', (err, files) => {
 
         if (err) console.log(err);
@@ -12,9 +12,9 @@ function loadCommands(bot) {
     
         jsfile.forEach((f, i) => {
             const pull = require(`../commands/${f}`);
-            bot.commands.set(pull.config.name, pull);
+            Client.commands.set(pull.config.name, pull);
             pull.config.aliases.forEach(alias => {
-                bot.aliases.set(alias, pull.config.name);
+                Client.aliases.set(alias, pull.config.name);
             });
         });
     });
