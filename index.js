@@ -12,7 +12,7 @@ client.aliases = new Discord.Collection();
 loadCommands(client);
 
 client.on('message', async (message) => {
-    if (message.author.bot) return;
+    if (message.author.Client) return;
 
 	const messageArray = message.content.split(' ');
 	const cmd = messageArray[0];
@@ -21,6 +21,6 @@ client.on('message', async (message) => {
     const prefix = "!";
 
 	if (!message.content.startsWith(prefix)) return;
-    const commandfile = client.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)));
+    const commandfile = client.commands.get(cmd.slice(prefix.length)) || Client.commands.get(Client.aliases.get(cmd.slice(prefix.length)));
     commandfile.run(client, message, args);
 })
